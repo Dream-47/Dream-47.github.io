@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Hexo</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2020-09-29T09:42:40.427Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>John Doe</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2020/09/27/C-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E8%9E%BA%E6%97%8B%E9%81%8D%E5%8E%86/"/>
+    <id>http://yoursite.com/2020/09/27/C-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E8%9E%BA%E6%97%8B%E9%81%8D%E5%8E%86/</id>
+    <published>2020-09-27T11:05:53.000Z</published>
+    <updated>2020-09-29T09:42:40.427Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="思路">思路</h2><ul><li><p>每圈遍历按照逆时针遍历</p><p><code>左上顶点=&gt;上边=&gt;右上顶点=&gt;右边=&gt;右下顶点=&gt;下边=&gt;左下顶点=&gt;左边</code></p></li><li><p>一圈一圈遍历，遍历次数应为长边次数的一半，如果不能取整，多遍历一次</p></li><li><p><a href="https://mp.weixin.qq.com/s/hR8aj05qbK1wsQ3B3mHkgA">参考</a></p><img src="C:\Users\28663\OneDrive\blog\source\i\47.png" alt="47"  /></li></ul><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> System.Linq;</span><br><span class="line"><span class="keyword">using</span> System.Text;</span><br><span class="line"></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> 螺旋遍历</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">SpiralTraversal</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title">Program</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">static</span> List&lt;<span class="keyword">int</span>&gt; <span class="title">SpiralOrder</span>(<span class="params"><span class="keyword">int</span>[,] data</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            List&lt;<span class="keyword">int</span>&gt; res = <span class="keyword">new</span> List&lt;<span class="keyword">int</span>&gt;();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> m = data.GetLength(<span class="number">0</span>);<span class="comment">//二维数组长度</span></span><br><span class="line">            <span class="keyword">int</span> n = data.GetLength(<span class="number">1</span>);<span class="comment">//二维数组宽度</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> h;<span class="comment">//螺旋遍历深度</span></span><br><span class="line">            <span class="keyword">int</span> max = Math.Max(m, n);<span class="comment">//深度以长边为准</span></span><br><span class="line">            h = (max + <span class="number">1</span>) / <span class="number">2</span>;<span class="comment">//假设长边为3，螺旋遍历深度应该等于2</span></span><br><span class="line">                              <span class="comment">//假设长边为2，螺旋遍历深度应该等于1</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//第k层</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; h; k++)</span><br><span class="line">            &#123;            </span><br><span class="line">                <span class="comment">//第一层</span></span><br><span class="line">                res.Add(data[k, k]);</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span> + k; i &lt; m - <span class="number">1</span> - k; i++)</span><br><span class="line">                &#123;</span><br><span class="line">                    res.Add(data[<span class="number">0</span>, i]);</span><br><span class="line">                &#125;</span><br><span class="line">                res.Add(data[<span class="number">0</span> + k, m - <span class="number">1</span> - k]);</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span> + k; j &lt; n - <span class="number">1</span> - k; j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    res.Add(data[j, m - <span class="number">1</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">                res.Add(data[m - <span class="number">1</span> -k, n - <span class="number">1</span> -k]);</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = m - <span class="number">2</span> -k; i &gt;= <span class="number">1</span>+k; i--)</span><br><span class="line">                &#123;</span><br><span class="line">                    res.Add(data[n - <span class="number">1</span>, i]);</span><br><span class="line">                &#125;</span><br><span class="line">                res.Add(data[n - <span class="number">1</span> - k, <span class="number">0</span>+k]);</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = n - <span class="number">2</span> - k; j &gt;= <span class="number">1</span>+k; j--)</span><br><span class="line">                &#123;</span><br><span class="line">                    res.Add(data[j, <span class="number">0</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">var</span> data = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">4</span>, <span class="number">4</span>] &#123;</span><br><span class="line">                &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;,</span><br><span class="line">                &#123;<span class="number">12</span>,<span class="number">13</span>,<span class="number">14</span>,<span class="number">5</span>&#125;,</span><br><span class="line">                &#123;<span class="number">11</span>,<span class="number">16</span>,<span class="number">15</span>,<span class="number">6</span>&#125;,</span><br><span class="line">                &#123;<span class="number">10</span>,<span class="number">9</span>,<span class="number">8</span>,<span class="number">7</span>&#125;,</span><br><span class="line">            &#125;;</span><br><span class="line">          </span><br><span class="line">            <span class="keyword">var</span> res = SpiralOrder(data);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">foreach</span> (<span class="keyword">var</span> item <span class="keyword">in</span> res)</span><br><span class="line">            &#123;</span><br><span class="line">                Console.Write(item + <span class="string">&quot;,&quot;</span>);               </span><br><span class="line">            &#125;</span><br><span class="line">            Console.ReadKey();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;思路&quot;&gt;思路&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;每圈遍历按照逆时针遍历&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;左上顶点=&amp;gt;上边=&amp;gt;右上顶点=&amp;gt;右边=&amp;gt;右下顶点=&amp;gt;下边=&amp;gt;左下顶点=&amp;gt;左边&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+
+      
+    
+    </summary>
+    
+    
+    
+      <category term="算法,C#" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95-C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>三目运算符</title>
+    <link href="http://yoursite.com/2020/09/10/%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
+    <id>http://yoursite.com/2020/09/10/%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6/</id>
+    <published>2020-09-10T10:10:47.000Z</published>
+    <updated>2020-09-14T08:35:49.506Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">        a = a &gt; <span class="number">0</span> ? a &gt; <span class="number">50</span> ? <span class="number">50</span> : a : a &lt; <span class="number">-50</span> ? <span class="number">-50</span> : a;</span><br><span class="line">        b = b &gt; <span class="number">0</span> ? b &gt; <span class="number">50</span> ? <span class="number">50</span> : b : b &lt; <span class="number">-50</span> ? <span class="number">-50</span> : b;</span><br><span class="line"></span><br><span class="line">hah</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span 
+      
+    
+    </summary>
+    
+    
+    
+      <category term="C#" scheme="http://yoursite.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>减脂餐</title>
+    <link href="http://yoursite.com/2020/08/25/%E5%87%8F%E8%84%82%E9%A4%90/"/>
+    <id>http://yoursite.com/2020/08/25/%E5%87%8F%E8%84%82%E9%A4%90/</id>
+    <published>2020-08-25T09:27:35.000Z</published>
+    <updated>2020-08-25T11:00:31.418Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="理论">理论</h2><ul><li>水果热量低，并且富含各种营养素与纤维素</li><li>水果≠果汁，果汁榨汁过程中会损失营养，并且在滤掉果渣后会损失掉纤维素，为了口感额外添加糖，使用香精，色素等都会带来额外负担。</li><li>纤维素主要来源于植物细胞壁，人体没有可以分解纤维素细胞酶，纤维素可以增加饱腹感，可以促进大肠蠕动，增加消化吸收。</li><li>GI值用来衡量食物中碳水化合物对血糖浓度的影响，指人体使用食物后会引起多大的血糖反应。吃GI高的食物，会让血糖迅速升高，刺激多巴胺的分泌，让我们感到快乐，所以越吃越想吃，完全停不下来。所以日常建议多食用低GI水果</li><li>水果挑选应该避开高含糖，高热量，高GI，高GL的品种，摄入量每天不能超过300克，分次少量慢速摄入</li><li>直接食用水果而并非二次加工果类</li></ul><h2 id="数据">数据</h2><ul><li><p>香蕉（93/Kcal）</p><p>一个中等大小的香蕉约等于100克</p></li><li><p>苹果（54/Kcal）</p><p>三分之一个苹果等于100克</p></li><li><p>桃子（51/Kcal）</p><p>半个中等大小的桃子约等于100克</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;理论&quot;&gt;理论&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;水果热量低，并且富含各种营养素与纤维素&lt;/li&gt;
+&lt;li&gt;水果≠果汁，果汁榨汁过程中会损失营养，并且在滤掉果渣后会损失掉纤维素，为了口感额外添加糖，使用香精，色素等都会带来额外负担。&lt;/li&gt;
+&lt;li&gt;纤维素主要来源于植物
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>C#迭代器</title>
+    <link href="http://yoursite.com/2020/08/21/C-%E8%BF%AD%E4%BB%A3%E5%99%A8/"/>
+    <id>http://yoursite.com/2020/08/21/C-%E8%BF%AD%E4%BB%A3%E5%99%A8/</id>
+    <published>2020-08-21T09:57:12.000Z</published>
+    <updated>2020-08-21T11:23:44.209Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言">前言</h2><p>几乎所有程序都需要用到循环访问集合，迭代器正模式是为此设计的</p><p>迭代器模式使得你能够获取到序列中的所有元素而不用关心其类型是什么</p><h2 id="构建迭代器">构建迭代器</h2>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+&lt;p&gt;几乎所有程序都需要用到循环访问集合，迭代器正模式是为此设计的&lt;/p&gt;
+&lt;p&gt;迭代器模式使得你能够获取到序列中的所有元素而不用关心其类型是什么&lt;/p&gt;
+&lt;h2 id=&quot;构建迭代器&quot;&gt;构建迭代器&lt;/h2&gt;
+
+      
+    
+    </summary>
+    
+    
+    
+      <category term="C#" scheme="http://yoursite.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>资源路径</title>
+    <link href="http://yoursite.com/2020/08/21/%E8%B5%84%E6%BA%90%E8%B7%AF%E5%BE%84/"/>
+    <id>http://yoursite.com/2020/08/21/%E8%B5%84%E6%BA%90%E8%B7%AF%E5%BE%84/</id>
+    <published>2020-08-21T03:18:20.000Z</published>
+    <updated>2020-08-21T09:24:10.309Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言">前言</h2><ul><li>unix的系统仅支持<code>/</code>作为路径分割符，web遵循unix命名</li><li>windows系统以<code>\</code>作为路径分割符号，并且兼容<code>/</code></li></ul><h2 id="Web">Web</h2><ul><li><p>**<code>浏览器地址</code>**使用<code>/</code>作为路径分割符</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://dream-47.github.io/i/headimg.jpg</span><br></pre></td></tr></table></figure></li><li><p>**<code>url</code>**使用<code>/</code>作为路径分割符</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span>&#123;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">url</span>(i/headimg.png);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>**<code>src</code>**加载本地资源时使用<code>/</code>或者<code>\</code>，加载网络资源时使用<code>/</code></p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;https://dream-47.github.io/i/headimg.jpg&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;i/headimg.jpg&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;i\headimg.jpg&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure></li><li><p><u><strong>统一使用<code>/</code>即可</strong></u></p></li></ul><h2 id="c">c#</h2><ul><li><p><code>\</code>在C#被认为转义字符，故应用<code>\\</code>作为路径分割符</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> path = <span class="string">&quot;E:\\test.txt&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> path = <span class="string">&quot;E:/test.txt&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> path = <span class="string">@&quot;E:\test.txt&quot;</span>;</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;unix的系统仅支持&lt;code&gt;/&lt;/code&gt;作为路径分割符，web遵循unix命名&lt;/li&gt;
+&lt;li&gt;windows系统以&lt;code&gt;\&lt;/code&gt;作为路径分割符号，并且兼容&lt;code&gt;/&lt;/code&gt;&lt;/li&gt;
+&lt;
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>js四舍五入</title>
+    <link href="http://yoursite.com/2020/08/20/js%E5%9B%9B%E8%88%8D%E4%BA%94%E5%85%A5/"/>
+    <id>http://yoursite.com/2020/08/20/js%E5%9B%9B%E8%88%8D%E4%BA%94%E5%85%A5/</id>
+    <published>2020-08-20T10:07:42.000Z</published>
+    <updated>2020-08-20T10:12:31.097Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>四舍五入</strong></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="built_in">Math</span>.round(n|num)</span><br></pre></td></tr></table></figure><p><strong>向后一位四舍五入</strong></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="built_in">Math</span>.round(n*<span class="number">10</span>)/<span class="number">10</span></span><br></pre></td></tr></table></figure><p><strong>向前一位四舍五入</strong></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="built_in">Math</span>.rond(n/<span class="number">10</span>)*<span class="number">10</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;四舍五入&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/
+      
+    
+    </summary>
+    
+    
+    
+      <category term="javascript" scheme="http://yoursite.com/tags/javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>html content</title>
+    <link href="http://yoursite.com/2020/08/19/html-content/"/>
+    <id>http://yoursite.com/2020/08/19/html-content/</id>
+    <published>2020-08-19T03:45:26.000Z</published>
+    <updated>2020-08-19T04:16:39.866Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="定义">定义</h2><p>CSS <code>content</code>用于对元素插入内容，通过配合<code>::before</code>与<code>::after</code>使用</p><h2 id="值">值</h2><ul><li><strong><code>none</code></strong></li><li><strong><code>nomal</code></strong></li><li>**<code>&lt;string&gt;</code>**文本内容</li><li>**<code>url()</code>**图片</li></ul><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/content">doc</a></p><p><a href="https://codepen.io/Climber_Front-end/pen/MWyjyWQ">test</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;定义&quot;&gt;定义&lt;/h2&gt;
+&lt;p&gt;CSS &lt;code&gt;content&lt;/code&gt;用于对元素插入内容，通过配合&lt;code&gt;::before&lt;/code&gt;与&lt;code&gt;::after&lt;/code&gt;使用&lt;/p&gt;
+&lt;h2 id=&quot;值&quot;&gt;值&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;st
+      
+    
+    </summary>
+    
+    
+    
+      <category term="css" scheme="http://yoursite.com/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>pc端移动端touch事件与mouse事件兼容</title>
+    <link href="http://yoursite.com/2020/08/18/pc%E7%AB%AF%E7%A7%BB%E5%8A%A8%E7%AB%AFtouch%E4%BA%8B%E4%BB%B6%E4%B8%8Emouse%E4%BA%8B%E4%BB%B6%E5%85%BC%E5%AE%B9/"/>
+    <id>http://yoursite.com/2020/08/18/pc%E7%AB%AF%E7%A7%BB%E5%8A%A8%E7%AB%AFtouch%E4%BA%8B%E4%BB%B6%E4%B8%8Emouse%E4%BA%8B%E4%BB%B6%E5%85%BC%E5%AE%B9/</id>
+    <published>2020-08-18T07:51:35.000Z</published>
+    <updated>2020-08-19T11:08:39.896Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>问题</strong></p><ul><li><p>pc端用mouse事件处理用户与web界面的交互，移动端用touch事件处理用户与web界面的交互</p></li><li><p>开发测试环境是pc端，而使用环境可能是移动端</p></li></ul><p><strong>使用</strong></p><ul><li><p>安装库</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/gh/Dream-47/JSLib@v1.1/asteroids.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">//安装该库后可以通过Modernizr.touch判断环境是否支持触摸</span><br></pre></td></tr></table></figure></li><li><p>核心代码</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mutiInput = &#123;</span><br><span class="line">    startEvent: Modernizr.touch? <span class="string">&#x27;touchstart&#x27;</span>:<span class="string">&#x27;mousedown&#x27;</span>,</span><br><span class="line">    moveEvent: Modernizr.touch? <span class="string">&#x27;touchmove&#x27;</span>:<span class="string">&#x27;mousemove&#x27;</span>,</span><br><span class="line">    endEvent: Modernizr.touch? <span class="string">&#x27;touchend&#x27;</span>:<span class="string">&#x27;mouseup&#x27;</span>,                        </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$(<span class="built_in">document</span>).on(mutiInput.startEvent, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;start&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line">$(<span class="built_in">document</span>).on(mutiInput.moveEvent, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;move&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line">$(<span class="built_in">document</span>).on(mutiInput.endEvent, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;end&quot;</span>)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;问题&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;pc端用mouse事件处理用户与web界面的交互，移动端用touch事件处理用户与web界面的交互&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;开发测试环境是pc端，而使用环境可能是移动端&lt;/p&gt;
+&lt;/li&gt;
+      
+    
+    </summary>
+    
+    
+    
+      <category term="javascript" scheme="http://yoursite.com/tags/javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>jquery html与text区别</title>
+    <link href="http://yoursite.com/2020/08/17/jquery%20html%E4%B8%8Etext%E5%8C%BA%E5%88%AB/"/>
+    <id>http://yoursite.com/2020/08/17/jquery%20html%E4%B8%8Etext%E5%8C%BA%E5%88%AB/</id>
+    <published>2020-08-17T10:40:16.000Z</published>
+    <updated>2020-08-18T01:49:11.515Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="text">text()</h2><p>获取匹配元素中<strong>每个</strong>元素的组合<strong>文本内容</strong>，包括他们的<strong>后代</strong></p><h2 id="html">html()</h2><p>获取匹配元素中<strong>第一个</strong>元素的<strong>html内容</strong>，包括他们的<strong>后代</strong></p><h2 id="text-string-num">text(string|num)</h2><p>设置<strong>所有</strong>匹配元素的<strong>文本内容</strong></p><h2 id="html-string-num">html(string|num)</h2><p>设置<strong>所有</strong>匹配元素的<strong>html内容</strong></p><ul><li><strong>文本内容是直接显示的字符串，html内容为包含标签的字符串</strong></li><li><strong>无论是get还是set，对子节点都会造成影响</strong></li><li><strong>最好将文本放在DOM树的最下方，这样get，set的值比较符合预估</strong></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;text&quot;&gt;text()&lt;/h2&gt;
+&lt;p&gt;获取匹配元素中&lt;strong&gt;每个&lt;/strong&gt;元素的组合&lt;strong&gt;文本内容&lt;/strong&gt;，包括他们的&lt;strong&gt;后代&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&quot;html&quot;&gt;html()&lt;/h2&gt;
+&lt;p&gt;
+      
+    
+    </summary>
+    
+    
+    
+      <category term="jquery" scheme="http://yoursite.com/tags/jquery/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git</title>
+    <link href="http://yoursite.com/2020/08/17/git/"/>
+    <id>http://yoursite.com/2020/08/17/git/</id>
+    <published>2020-08-17T01:20:26.000Z</published>
+    <updated>2020-08-17T07:54:51.982Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="git上传本地代码到github">git上传本地代码到github</h2><ol><li><p><strong>本地创建git空仓库</strong></p><p>cd本地项目的根目录下，该命令会在创建一个.git文件夹</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init<span class="comment">//创建本地空仓库</span></span><br></pre></td></tr></table></figure></li><li><p><strong>列下待上传文件</strong></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add .filename<span class="comment">//添加该路径下某个文件</span></span><br><span class="line">git add .        <span class="comment">//添加该路径下所有文件</span></span><br></pre></td></tr></table></figure></li><li><p><strong>列下文件提交到本地仓库</strong></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;注释语句&quot;</span></span><br></pre></td></tr></table></figure></li><li><p><strong>github创建仓库</strong></p></li><li><p><strong>本地仓库与远程仓库关联</strong></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这里origin类似一个变量，</span></span><br><span class="line">git remote add origin https:<span class="comment">//github.com/user/repo.git//添加https关联</span></span><br><span class="line">git remote -v <span class="comment">//查看关联</span></span><br><span class="line">git remote set-url origin git@github.com:User/repo.git<span class="comment">//修改成ssh方式,前提是部署了ssh</span></span><br></pre></td></tr></table></figure></li><li><p><strong>上传代码到github仓库</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure></li><li><p><strong>首次上传push失败是因为创建的github仓库并非空仓库，存在README.md文件</strong></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull --rebase origin master</span><br></pre></td></tr></table></figure></li></ol><h2 id="使用JsDeliver访问github资源">使用JsDeliver访问github资源</h2><h3 id="前言">前言</h3><p>本想通过将一些通用的js库上传到github，然后通过src访问对应资源，</p><p>测试时发现html在运行时会出现CROS跨域问题，</p><p><em><u><strong>请不要把github当成cdn</strong></u></em>，</p><p><a href="https://www.jsdelivr.com/?docs=gh">jsDeliver</a>可以解决这个问题</p><h3 id="部署">部署</h3><ol><li><p><strong>github创建release包</strong></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Tag version <span class="comment">//v1.0</span></span><br><span class="line">Release title <span class="comment">//whatever</span></span><br><span class="line"><span class="comment">//相当于把原文件放入云服务器中，并采用cdn加载，而他们解决了CROS问题？</span></span><br></pre></td></tr></table></figure></li><li><p><strong>访问github资源</strong></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="comment">//cdn.jsdelivr.net/gh/user/repo@version/file //加载特定版本的资源https://cdn.jsdelivr.net/gh/user/repo/core.min.js //将“ .min”添加到任何JS / CSS文件以获取缩小版本，如果不存在，我们会为您生成</span></span><br></pre></td></tr></table></figure></li><li><p><strong>如果发布版本有问题，需要重新发布一个版本，同时更新version，cdn会缓存错误资源，这倒比较麻烦</strong></p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;git上传本地代码到github&quot;&gt;git上传本地代码到github&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;本地创建git空仓库&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;cd本地项目的根目录下，该命令会在创建一个.git文件夹&lt;/p&gt;
+&lt;figure cla
+      
+    
+    </summary>
+    
+    
+    
+      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>jslib</title>
+    <link href="http://yoursite.com/2020/08/17/jslib/"/>
+    <id>http://yoursite.com/2020/08/17/jslib/</id>
+    <published>2020-08-17T01:18:37.000Z</published>
+    <updated>2020-08-17T09:32:33.462Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Hexo本地部署live2d">Hexo本地部署live2d</h2><ul><li><p>复制<a href="https://github.com/stevenjoezhang/live2d-widget">仓库</a>到 <code>/source/</code>下</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">live2d.min.js    -live2d sdk</span><br><span class="line">waifu-tips.js    -按钮和对话框的逻辑</span><br><span class="line">waifu.css        -按钮和对话框样式表</span><br><span class="line">waifu-tips.json  -配置文档，用于配置按钮的对话内容</span><br><span class="line">autoload.js      -加载js，css，json入口</span><br></pre></td></tr></table></figure></li><li><p>修改<code>autoload</code>脚本中加载路径</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> live2d_path = <span class="string">&quot;/live2d-widget/&quot;</span>;<span class="comment">//hexo生成静态网页后，该路径正好对应上</span></span><br></pre></td></tr></table></figure></li><li><p>修改<code>waifu.css</code>脚本中看板娘的位置</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//让其置于右下角</span><br><span class="line"><span class="selector-id">#waifu</span>&#123;    </span><br><span class="line">   <span class="attribute">right</span>:<span class="number">20px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>blog中插入脚本</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css&quot;</span>&gt;</span>//按钮图片引用</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&#x27;/live2d-widget/autoload.js&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>   </span><br></pre></td></tr></table></figure></li></ul><h2 id="CDN部署live2d">CDN部署live2d</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/gh/Dream-47/JSLib@v1.0/live2d/autoload.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br></pre></td></tr></table></figure><h2 id="点击爱心效果">点击爱心效果</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/gh/Dream-47/JSLib@v1.0/love.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure><h2 id="消灭网页的飞机游戏">消灭网页的飞机游戏</h2><p><a href="www.websiteasteroids.com">作者传送门</a></p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//建议在head/body后引入</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&#x27;http://www.websiteasteroids.com/asteroids.min.js&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>//作者源库</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/gh/Dream-47/JSLib@v1.1/asteroids.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>//github托管库</span><br></pre></td></tr></table></figure><script src='http://www.websiteasteroids.com/asteroids.min.js'></script>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;Hexo本地部署live2d&quot;&gt;Hexo本地部署live2d&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;复制&lt;a href=&quot;https://github.com/stevenjoezhang/live2d-widget&quot;&gt;仓库&lt;/a&gt;到 &lt;code&gt;/source/&lt;
+      
+    
+    </summary>
+    
+    
+    
+      <category term="javascript plugin" scheme="http://yoursite.com/tags/javascript-plugin/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>jquery</title>
+    <link href="http://yoursite.com/2020/08/15/jquery/"/>
+    <id>http://yoursite.com/2020/08/15/jquery/</id>
+    <published>2020-08-14T16:00:00.000Z</published>
+    <updated>2020-08-17T09:53:06.298Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Jquery遍历">Jquery遍历</h2><h3 id="定义">定义</h3><p><strong>输入</strong>DOM树中的某个节点，<strong>返回</strong>DOM树中任意节点</p><p><img src="../Jquery/i/img_travtree.png" alt=""></p><h3 id="向下遍历">向下遍历</h3><blockquote><ul><li><p>children()</p><p>返回DOM树中该节点的下一级元素</p></li><li><p>children(selector)</p><p>返回DOM树该节点的下一级元素 ，并使用选择器进行过滤</p></li><li><p>find(*)</p><p>返回DOM树该节点的所有下级元素</p></li><li><p>find(selector)</p><p>返回DOM树该节点的所有下级元素，并使用选择器进行过滤</p></li></ul></blockquote><h2 id="Jquery效果">Jquery效果</h2><blockquote><ul><li><p><strong>show([speed,[easing],[fn]])</strong></p><ul><li>speed(Num/Str) ：时间，可用参数&quot;slow&quot;,“normal”, or “fast”.</li><li>easing(Str)：缓动曲线，默认是&quot;swing&quot;，可用参数&quot;linear&quot;</li><li>fn(Func)：完成回调</li></ul></li><li><p><strong>show([speed,[fn]])</strong></p></li><li><p><strong>show()</strong></p></li><li><p><strong>hide([speed,[easing],[fn]])</strong></p></li><li><p><strong>hide([speed,[fn]])</strong></p></li><li><p><strong>hide()</strong></p></li><li><p><strong>toggle([speed,[easing],[fn]])</strong></p></li><li><p><strong>toggle([speed,[fn]])</strong></p></li><li><p><strong>toggle（）</strong></p></li><li><p><strong>toggle(display)</strong></p><ul><li><pre><code class="language-javascript">toggle(true) == show()toggle(false) == hide()</code></pre></li></ul></li><li><p><strong>fadeIn([speed,[easing],[fn]])</strong></p></li><li><p><strong>fadeOut([speed,[easing],[fn]])</strong></p></li><li><p><strong>fadeTo([speed,opacity,[easing],[fn]])</strong></p></li><li></li></ul></blockquote><h2 id="测试">测试</h2><p><a href="https://dream-47.github.io/Jquery/code/index.html">传送门</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;Jquery遍历&quot;&gt;Jquery遍历&lt;/h2&gt;
+&lt;h3 id=&quot;定义&quot;&gt;定义&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;输入&lt;/strong&gt;DOM树中的某个节点，&lt;strong&gt;返回&lt;/strong&gt;DOM树中任意节点&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../Jquery
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Jquery" scheme="http://yoursite.com/tags/Jquery/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>todo</title>
+    <link href="http://yoursite.com/2020/08/15/todo/"/>
+    <id>http://yoursite.com/2020/08/15/todo/</id>
+    <published>2020-08-14T16:00:00.000Z</published>
+    <updated>2020-09-14T02:49:08.945Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><script src="https://cdn.jsdelivr.net/gh/Dream-47/JSLib@v1.0/live2d/autoload.js"></script> <script src="https://cdn.jsdelivr.net/gh/Dream-47/JSLib@v1.0/love.min.js"></script><ul><li><s>jquery 遍历</s></li><li><s>jquery hide/show</s></li><li><s>jquery html/text</s></li><li><s>draw a keyboard by markdown</s></li><li><s>mouse event/keybordevent 兼容</s></li><li>C#迭代与协程原理</li><li>浏览器缓存机制</li><li><s>js里边设置本地url</s></li><li><s>通过content设置url无法通过jquery修改</s></li><li>飞机js研究</li><li>CSS  background</li><li>手机刷机</li><li>清理幕布</li><li><code>/</code> <code>\</code>作为路径的区别</li><li>js时间戳与unity时间戳</li><li>bool outofBorder = (transform.position.x &lt; left_border) ||<br>(transform.position.x &gt; right_border) ||<br>(transform.position.z &gt; top_border) ||<br>(transform.position.z &lt; down_border) ;//三木表达式与条件判断区别</li></ul><ul><li>dotween playbyid/ dotween animation 组件运行后杀死了动画</li><li>dotween local recttransform 与transform</li><li>下落js特效</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css&quot;&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/gh/D
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Todo" scheme="http://yoursite.com/tags/Todo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>tool</title>
+    <link href="http://yoursite.com/2020/08/11/tool/"/>
+    <id>http://yoursite.com/2020/08/11/tool/</id>
+    <published>2020-08-11T10:50:37.000Z</published>
+    <updated>2020-08-19T11:13:38.920Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li><a href="http://www.jsnice.org/">mim.js反编译</a><sup><strong><code>隐藏“use strict”即可变成可使用的js源码</code></strong></sup></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.jsnice.org/&quot;&gt;mim.js反编译&lt;/a&gt;&lt;sup&gt;&lt;strong&gt;&lt;code&gt;隐藏“use strict”即可变成可使用的js源码&lt;/code&gt;&lt;/strong&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      
+    
+    </summary>
+    
+    
+    
+      <category term="javascript" scheme="http://yoursite.com/tags/javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2020/08/07/hello-world/"/>
+    <id>http://yoursite.com/2020/08/07/hello-world/</id>
+    <published>2020-08-07T03:35:53.971Z</published>
+    <updated>2020-08-17T01:11:55.599Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start">Quick Start</h2><h3 id="Create-a-new-post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MarkdownBug</title>
+    <link href="http://yoursite.com/2020/08/06/HexoBug/"/>
+    <id>http://yoursite.com/2020/08/06/HexoBug/</id>
+    <published>2020-08-05T16:00:00.000Z</published>
+    <updated>2020-08-11T11:03:46.942Z</updated>
+    
+    <content type="html"><![CDATA[<pre><code>end of the stream or a document separator is expected at line 18, column 1==&gt;分割符号使用不当</code></pre><hr><pre><code>remote: Invalid username or password.fatal: Authentication failed for 'https://github.com/Dream-47/Dream-47.github.io.git/'==&gt;修改yml deploy配置https://github.com/Dream-47/Dream-47.github.io.gitgit@github.com:Dream-47/Dream-47.github.io.git**</code></pre><hr><pre><code>Markdown区块无特殊显示，列表不靠左对齐，表格不对</code></pre><hr><pre><code>Markdown注释没有隐藏</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;pre&gt;&lt;code&gt;end of the stream or a document separator is expected at line 18, column 1
+==&amp;gt;
+分割符号使用不当
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;remote: 
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Bug" scheme="http://yoursite.com/tags/Bug/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>markdown</title>
+    <link href="http://yoursite.com/2020/08/06/markdown/"/>
+    <id>http://yoursite.com/2020/08/06/markdown/</id>
+    <published>2020-08-05T16:00:00.000Z</published>
+    <updated>2020-08-17T09:27:12.817Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="主题">主题</h2><ol><li><strong>使用<code>=</code>标记一级标题，使用<code>-</code>标记二级标题(标记符号位于文本下方)</strong></li><li><strong>使用<code>#</code>+<kbd>space</kbd> 标记1-6级标题</strong></li></ol><hr><h2 id="段落换行">段落换行</h2><p><strong>使用两个以上的空格键+回车换行(实际上直接回车键换行)</strong></p><hr><h2 id="字体">字体</h2><blockquote><ul><li>单<code>*</code>或<code>_</code>用于斜体<br><em>斜体</em></li><li>两个叠加用于粗体<br><strong>粗体</strong></li><li>三个叠加用于粗斜体<br><em><strong>粗斜体</strong></em></li><li><code>~~</code>用于删除<br><s>删除</s></li><li><code>&lt;u&gt;</code>用于下划线<br><u>下滑线</u></li><li>文本[^脚注][^脚注用不了啊]CCD</li></ul></blockquote><hr><h2 id="分割线">分割线</h2><p><strong>三个以上的<code>*</code>或<code>#</code>或<code>_</code>生成分割线，中间可以有空格(单行中有三个以上的相同标识符)</strong></p><hr><h2 id="列表">列表</h2><p><strong>无序列表</strong>:<code>*/+/-</code> + `` + <kbd>space</kbd></p><ul><li>列表</li></ul><ul><li>列表</li></ul><ul><li>列表</li></ul><p><strong>有序列表</strong><code>num</code> + <code>.</code> + <kbd>space</kbd></p><ol><li>是47啦</li><li>写作3读作2</li></ol><p><strong>列表嵌套</strong><code>space</code>*4</p><ol><li>列表一<ul><li>嵌套嵌套1</li></ul></li><li>列表二<ul><li>嵌套二</li></ul></li></ol><hr><h2 id="区块">区块</h2><p><strong>增加段落开头<code>&gt;</code>+<kbd>space</kbd>(事实上并不需要空格)</strong><br>区块内嵌列表</p><blockquote><p>ABC</p><blockquote><p>DEF</p><ol><li>第一行<ul><li>第二行</li></ul></li></ol></blockquote></blockquote><p>列表内嵌区块</p><ul><li><p>A</p><blockquote><p>AB<br>AC</p></blockquote></li><li><p>B</p><blockquote><p>BC<br>BA</p></blockquote></li></ul><hr><h2 id="代码">代码</h2><p>函数名可以使用``<br><code>Test()</code>;</p><p>代码区块可以用4个空格(整体)或者一个制表符(Tab键)</p><pre><code>void Test()&#123;    console.write(&quot;47&quot;);&#125;</code></pre><p>也可以使用````包裹代码,指定语言决定渲染效果</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Test</span><span class="params">()</span></span>&#123;</span><br><span class="line">    console.write(<span class="string">&quot;47&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><h2 id="链接">链接</h2><p>使用[name]+(url)标记带有名称的链接<a href="https://dream-47.github.io">Dream-47</a><br>使用&lt; url &gt;标记不带名称的链接<a href="https://github.com/Dream-47">https://github.com/Dream-47</a><br>也可以使用变量url进行赋值,这是博客的域名<a href="https://dream-47.github.io">Dream-47</a></p><h2 id="图片">图片</h2><p>！+ [图片描述] + (图片地址 “honor”)(图片不可用本地路径代替？)<br><img src="https://dream-47.github.io/i/headimg.jpg" alt="头像" title="47"></p><p>或者与网址一样使用变量(貌似不能用字符串拼接的形式对变量进行处)<br><img src="https://dream-47.github.io/i/headimg.jpg" alt="头像" title="47"></p><p>如果想要图片宽高进行处理，请使用html中的img标签(如果用百分比定义图片的大小的话,height无作用)<br><img src="https://dream-47.github.io/i/headimg.jpg" width = 125 height = 70%></img></p><hr><h2 id="表格">表格</h2><p>使用 | 分割不同的单元格，使用 - 分割(必须)表头与其他行</p><table><thead><tr><th style="text-align:right">AA</th><th>BB</th><th style="text-align:center">CC</th></tr></thead><tbody><tr><td style="text-align:right">E</td><td>F</td><td style="text-align:center">G</td></tr><tr><td style="text-align:right">H</td><td>I</td><td style="text-align:center">J</td></tr></tbody></table><p>-: 右对齐 :- 左对齐 :-:居中对齐(表头元素在整个单元格中居中，其他行元素以表头元素对齐，默认向左对齐))</p><hr><h2 id="高级技巧">高级技巧</h2><p><strong>Markdown可以使用一些html标签</strong></p><blockquote><ul><li><code>kbd</code>键盘文本 <kbd>hellow</kbd></li><li><code>b</code>粗体 <b>hellow</b></li><li><code>i</code>斜体 <i>hellow</i></li><li><code>sup</code>上标 <sup>hellow</sup></li><li><code>sub</code>下标 <sub>hellow</sub></li><li><code>em</code>强调<em>hellow</em>(效果目前等同于斜体，用与特定术语与概念)</li><li><code>br</code>换行hellow<br>world(在html中,br没有结束符)</li></ul></blockquote><p><strong>Markdown使用转义符号<code>\</code>对特殊符号进行转义，恢复原有含义</strong><br><em>斜体</em><br>*斜体*</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;主题&quot;&gt;主题&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;使用&lt;code&gt;=&lt;/code&gt;标记一级标题，使用&lt;code&gt;-&lt;/code&gt;标记二级标题(标记符号位于文本下方)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;使用&lt;code&gt;#&lt;/code&gt;+&lt;k
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Markdown" scheme="http://yoursite.com/tags/Markdown/"/>
+    
+  </entry>
+  
+</feed>
