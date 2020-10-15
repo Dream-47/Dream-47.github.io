@@ -19,20 +19,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Hello World | 建设中的blog</title>
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <title>Unity研究之兄弟节点位置互换 | 建设中的blog</title>
+  <meta name="description" content="父节点获取子节点引用 12345678910&#x2F;&#x2F;通过迭代寻找到子物体foreach (var child in transform)&amp;#123;&amp;#125;&#x2F;&#x2F;通过for循环找到子物体foreach (var child in transform)&amp;#123;&amp;#125; 两兄弟交换节点 123456void SwapTransform(Transform b1, Transform b2) &amp;#">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2020/08/07/hello-world/index.html">
+<meta property="og:title" content="Unity研究之兄弟节点位置互换">
+<meta property="og:url" content="http://yoursite.com/2020/10/15/Unity%E7%A0%94%E7%A9%B6%E4%B9%8B%E5%85%84%E5%BC%9F%E8%8A%82%E7%82%B9%E4%BD%8D%E7%BD%AE%E4%BA%92%E6%8D%A2/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="父节点获取子节点引用 12345678910&#x2F;&#x2F;通过迭代寻找到子物体foreach (var child in transform)&amp;#123;&amp;#125;&#x2F;&#x2F;通过for循环找到子物体foreach (var child in transform)&amp;#123;&amp;#125; 两兄弟交换节点 123456void SwapTransform(Transform b1, Transform b2) &amp;#">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-08-07T03:35:53.971Z">
-<meta property="article:modified_time" content="2020-08-17T01:11:55.599Z">
+<meta property="article:published_time" content="2020-10-15T10:45:58.000Z">
+<meta property="article:modified_time" content="2020-10-15T11:08:07.224Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Unity">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://yoursite.com/2020/08/07/hello-world/index.html">
+  <link rel="canonical" href="http://yoursite.com/2020/10/15/Unity%E7%A0%94%E7%A9%B6%E4%B9%8B%E5%85%84%E5%BC%9F%E8%8A%82%E7%82%B9%E4%BD%8D%E7%BD%AE%E4%BA%92%E6%8D%A2/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -338,14 +339,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-hello-world" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-Unity研究之兄弟节点位置互换" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      Unity研究之兄弟节点位置互换
     </h1>
   
 
@@ -353,37 +354,32 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2020/08/07/hello-world/" class="article-date">
-	  <time datetime="2020-08-07T03:35:53.971Z" itemprop="datePublished">2020-08-07</time>
+	<a href="/2020/10/15/Unity%E7%A0%94%E7%A9%B6%E4%B9%8B%E5%85%84%E5%BC%9F%E8%8A%82%E7%82%B9%E4%BD%8D%E7%BD%AE%E4%BA%92%E6%8D%A2/" class="article-date">
+	  <time datetime="2020-10-15T10:45:58.000Z" itemprop="datePublished">2020-10-15</time>
 	</a>
 </span>
         
         
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Unity/" rel="tag">Unity</a>
+  </span>
+
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/08/07/hello-world/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/10/15/Unity%E7%A0%94%E7%A9%B6%E4%B9%8B%E5%85%84%E5%BC%9F%E8%8A%82%E7%82%B9%E4%BD%8D%E7%BD%AE%E4%BA%92%E6%8D%A2/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start">Quick Start</h2>
-<h3 id="Create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+        <h3 id="父节点获取子节点引用">父节点获取子节点引用</h3>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过迭代寻找到子物体</span></span><br><span class="line"><span class="keyword">foreach</span> (<span class="keyword">var</span> child <span class="keyword">in</span> transform)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//通过for循环找到子物体</span></span><br><span class="line"><span class="keyword">foreach</span> (<span class="keyword">var</span> child <span class="keyword">in</span> transform)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="两兄弟交换节点">两兄弟交换节点</h3>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SwapTransform</span>(<span class="params">Transform b1, Transform b2</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">int</span> b1Index = b1.GetSiblingIndex();</span><br><span class="line">    <span class="keyword">int</span> b2Index = b2.GetSiblingIndex();</span><br><span class="line">    b1.SetSiblingIndex(b2Index);</span><br><span class="line">    b2.SetSiblingIndex(b1Index);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="同时交换两兄弟的节点与位置">同时交换两兄弟的节点与位置</h2>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//交换_transform下m节点与n节点的索引与位置</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">RankArithmetic</span>(<span class="params">Transform _transform,<span class="keyword">int</span> m ,<span class="keyword">int</span> n</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//---------交换位置----------</span></span><br><span class="line">    <span class="comment">//储存所有位置信息</span></span><br><span class="line">    List&lt;Vector3&gt; poses = <span class="keyword">new</span> List&lt;Vector3&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = m; i &lt;= n ; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        poses.Add(_transform.GetChild(i).position);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//交换位置</span></span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; transform.childCount; i++)</span><br><span class="line">    &#123;            </span><br><span class="line">        <span class="comment">//[m,n-1]位位置顺延下一位</span></span><br><span class="line">        <span class="keyword">if</span>(i&gt;=m &amp;&amp; i&lt;n)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//transform.GetChild(i).position = poses[j+1];</span></span><br><span class="line">            <span class="comment">//Animation</span></span><br><span class="line">            transform.GetChild(i).DOMove(poses[j+<span class="number">1</span>],<span class="number">0.5f</span>);</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//n位提到首位</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(i == n)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//transform.GetChild(i).transform.position = poses[0];</span></span><br><span class="line">            transform.GetChild(i).DOMove(poses[<span class="number">0</span>],<span class="number">0.5f</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//---------交换索引----------</span></span><br><span class="line">    _transform.GetChild(n).SetSiblingIndex(m);        </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <div class="article-footer">
@@ -392,7 +388,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://yoursite.com/2020/08/07/hello-world/" title="Hello World" target="_blank" rel="external">http://yoursite.com/2020/08/07/hello-world/</a>
+      <a href="http://yoursite.com/2020/10/15/Unity%E7%A0%94%E7%A9%B6%E4%B9%8B%E5%85%84%E5%BC%9F%E8%8A%82%E7%82%B9%E4%BD%8D%E7%BD%AE%E4%BA%92%E6%8D%A2/" title="Unity研究之兄弟节点位置互换" target="_blank" rel="external">http://yoursite.com/2020/10/15/Unity%E7%A0%94%E7%A9%B6%E4%B9%8B%E5%85%84%E5%BC%9F%E8%8A%82%E7%82%B9%E4%BD%8D%E7%BD%AE%E4%BA%92%E6%8D%A2/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -438,13 +434,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2020/08/11/%E5%B7%A5%E5%85%B7/" title="工具"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2020/08/06/HexoBug/" title="MarkdownBug"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2020/10/12/Unity%E5%AD%90%E5%BC%B9%E8%BF%BD%E8%B8%AA/" title="Unity子弹追踪"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
