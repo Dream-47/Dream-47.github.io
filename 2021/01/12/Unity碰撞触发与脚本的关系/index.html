@@ -19,21 +19,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>工具 | 建设中的blog</title>
-  <meta name="description" content="mim.js反编译隐藏“use strict”即可变成可使用的js源码   git录制">
+  <title>Unity小结 | 建设中的blog</title>
+  <meta name="description" content="父物体检测碰撞触发，子物体挂碰撞体是否触发碰撞函数  经测试，可行  父物体获取子物体引用的几种方法，以及在子物体隐藏的状况下是否可获取   对于 123ROOT--A--B(隐藏) transform.GetChild() 可获取隐藏物体 transfrom.Find()可获取隐藏物体 transfrom.childCount可获取隐藏物体   生成物体后代码与物体身上脚本的Start函数的顺序">
 <meta property="og:type" content="article">
-<meta property="og:title" content="工具">
-<meta property="og:url" content="http://yoursite.com/2020/08/11/%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:title" content="Unity小结">
+<meta property="og:url" content="http://yoursite.com/2021/01/12/Unity%E7%A2%B0%E6%92%9E%E8%A7%A6%E5%8F%91%E4%B8%8E%E8%84%9A%E6%9C%AC%E7%9A%84%E5%85%B3%E7%B3%BB/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="mim.js反编译隐藏“use strict”即可变成可使用的js源码   git录制">
+<meta property="og:description" content="父物体检测碰撞触发，子物体挂碰撞体是否触发碰撞函数  经测试，可行  父物体获取子物体引用的几种方法，以及在子物体隐藏的状况下是否可获取   对于 123ROOT--A--B(隐藏) transform.GetChild() 可获取隐藏物体 transfrom.Find()可获取隐藏物体 transfrom.childCount可获取隐藏物体   生成物体后代码与物体身上脚本的Start函数的顺序">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-08-11T10:50:37.000Z">
-<meta property="article:modified_time" content="2020-10-12T10:44:11.061Z">
+<meta property="article:published_time" content="2021-01-12T07:32:27.000Z">
+<meta property="article:modified_time" content="2021-01-12T11:16:44.280Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="Unity">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://yoursite.com/2020/08/11/%E5%B7%A5%E5%85%B7/index.html">
+  <link rel="canonical" href="http://yoursite.com/2021/01/12/Unity%E7%A2%B0%E6%92%9E%E8%A7%A6%E5%8F%91%E4%B8%8E%E8%84%9A%E6%9C%AC%E7%9A%84%E5%85%B3%E7%B3%BB/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -339,14 +339,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-工具" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-Unity碰撞触发与脚本的关系" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      工具
+      Unity小结
     </h1>
   
 
@@ -354,34 +354,41 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2020/08/11/%E5%B7%A5%E5%85%B7/" class="article-date">
-	  <time datetime="2020-08-11T10:50:37.000Z" itemprop="datePublished">2020-08-11</time>
+	<a href="/2021/01/12/Unity%E7%A2%B0%E6%92%9E%E8%A7%A6%E5%8F%91%E4%B8%8E%E8%84%9A%E6%9C%AC%E7%9A%84%E5%85%B3%E7%B3%BB/" class="article-date">
+	  <time datetime="2021-01-12T07:32:27.000Z" itemprop="datePublished">2021-01-12</time>
 	</a>
 </span>
         
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/javascript/" rel="tag">javascript</a>
+	<a class="article-tag-link-link" href="/tags/Unity/" rel="tag">Unity</a>
   </span>
 
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/08/11/%E5%B7%A5%E5%85%B7/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/01/12/Unity%E7%A2%B0%E6%92%9E%E8%A7%A6%E5%8F%91%E4%B8%8E%E8%84%9A%E6%9C%AC%E7%9A%84%E5%85%B3%E7%B3%BB/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <ul>
+        <h4 id="父物体检测碰撞触发，子物体挂碰撞体是否触发碰撞函数">父物体检测碰撞触发，子物体挂碰撞体是否触发碰撞函数</h4>
+<ul>
+<li>经测试，可行</li>
+</ul>
+<h4 id="父物体获取子物体引用的几种方法，以及在子物体隐藏的状况下是否可获取">父物体获取子物体引用的几种方法，以及在子物体隐藏的状况下是否可获取</h4>
+<ul>
 <li>
-<p><a target="_blank" rel="noopener" href="http://www.jsnice.org/">mim.js反编译</a><sup><strong><code>隐藏“use strict”即可变成可使用的js源码</code></strong></sup></p>
-</li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://github.com/NickeManarin/ScreenToGif">git录制</a></p>
+<p>对于</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ROOT</span><br><span class="line">--A</span><br><span class="line">--B(隐藏)</span><br></pre></td></tr></table></figure>
+<p><code>transform.GetChild() </code>可获取隐藏物体</p>
+<p><code>transfrom.Find()</code>可获取隐藏物体</p>
+<p><code>transfrom.childCount</code>可获取隐藏物体</p>
 </li>
 </ul>
+<h4 id="生成物体后代码与物体身上脚本的Start函数的顺序">生成物体后代码与物体身上脚本的Start函数的顺序</h4>
 
       
     </div>
@@ -391,7 +398,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://yoursite.com/2020/08/11/%E5%B7%A5%E5%85%B7/" title="工具" target="_blank" rel="external">http://yoursite.com/2020/08/11/%E5%B7%A5%E5%85%B7/</a>
+      <a href="http://yoursite.com/2021/01/12/Unity%E7%A2%B0%E6%92%9E%E8%A7%A6%E5%8F%91%E4%B8%8E%E8%84%9A%E6%9C%AC%E7%9A%84%E5%85%B3%E7%B3%BB/" title="Unity小结" target="_blank" rel="external">http://yoursite.com/2021/01/12/Unity%E7%A2%B0%E6%92%9E%E8%A7%A6%E5%8F%91%E4%B8%8E%E8%84%9A%E6%9C%AC%E7%9A%84%E5%85%B3%E7%B3%BB/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -437,13 +444,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2020/08/15/todo/" title="todo"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2020/08/07/hello-world/" title="Hello World"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2021/01/06/C-%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/" title="C#命名规范"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     

@@ -19,21 +19,16 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>工具 | 建设中的blog</title>
-  <meta name="description" content="mim.js反编译隐藏“use strict”即可变成可使用的js源码   git录制">
-<meta property="og:type" content="article">
-<meta property="og:title" content="工具">
-<meta property="og:url" content="http://yoursite.com/2020/08/11/%E5%B7%A5%E5%85%B7/index.html">
+  <title>建设中的blog</title>
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="mim.js反编译隐藏“use strict”即可变成可使用的js源码   git录制">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-08-11T10:50:37.000Z">
-<meta property="article:modified_time" content="2020-10-12T10:44:11.061Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="javascript">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://yoursite.com/2020/08/11/%E5%B7%A5%E5%85%B7/index.html">
+  <link rel="canonical" href="http://yoursite.com/page/3/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -336,17 +331,18 @@
 </aside>
 
   
+  <main class="main" role="main">
   
-<main class="main" role="main">
-  <div class="content">
-  <article id="post-工具" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  
+    <div class="content">
+  <article id="post-markdown" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
-    <h1 class="article-title" itemprop="name">
-      工具
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/06/markdown/">markdown</a>
     </h1>
   
 
@@ -354,34 +350,176 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2020/08/11/%E5%B7%A5%E5%85%B7/" class="article-date">
-	  <time datetime="2020-08-11T10:50:37.000Z" itemprop="datePublished">2020-08-11</time>
+	<a href="/2020/08/06/markdown/" class="article-date">
+	  <time datetime="2020-08-05T16:00:00.000Z" itemprop="datePublished">2020-08-06</time>
 	</a>
 </span>
         
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/javascript/" rel="tag">javascript</a>
+	<a class="article-tag-link-link" href="/tags/Markdown/" rel="tag">Markdown</a>
   </span>
 
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/08/11/%E5%B7%A5%E5%85%B7/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/08/06/markdown/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <ul>
+        <h2 id="主题">主题</h2>
+<ol>
+<li><strong>使用<code>=</code>标记一级标题，使用<code>-</code>标记二级标题(标记符号位于文本下方)</strong></li>
+<li><strong>使用<code>#</code>+<kbd>space</kbd> 标记1-6级标题</strong></li>
+</ol>
+<hr>
+<h2 id="段落换行">段落换行</h2>
+<p><strong>使用两个以上的空格键+回车换行(实际上直接回车键换行)</strong></p>
+<hr>
+<h2 id="字体">字体</h2>
+<blockquote>
+<ul>
+<li>单<code>*</code>或<code>_</code>用于斜体<br><em>斜体</em></li>
+<li>两个叠加用于粗体<br><strong>粗体</strong></li>
+<li>三个叠加用于粗斜体<br><em><strong>粗斜体</strong></em></li>
+<li><code>~~</code>用于删除<br><s>删除</s></li>
+<li><code>&lt;u&gt;</code>用于下划线<br><u>下滑线</u></li>
+<li>文本[^脚注][^脚注用不了啊]CCD</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="分割线">分割线</h2>
+<p><strong>三个以上的<code>*</code>或<code>#</code>或<code>_</code>生成分割线，中间可以有空格(单行中有三个以上的相同标识符)</strong></p>
+<hr>
+<h2 id="列表">列表</h2>
+<p><strong>无序列表</strong>:<code>*/+/-</code> + `` + <kbd>space</kbd></p>
+<ul>
+<li>列表</li>
+</ul>
+<ul>
+<li>列表</li>
+</ul>
+<ul>
+<li>列表</li>
+</ul>
+<p><strong>有序列表</strong><code>num</code> + <code>.</code> + <kbd>space</kbd></p>
+<ol>
+<li>是47啦</li>
+<li>写作3读作2</li>
+</ol>
+<p><strong>列表嵌套</strong><code>space</code>*4</p>
+<ol>
+<li>列表一
+<ul>
+<li>嵌套嵌套1</li>
+</ul>
+</li>
+<li>列表二
+<ul>
+<li>嵌套二</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="区块">区块</h2>
+<p><strong>增加段落开头<code>&gt;</code>+<kbd>space</kbd>(事实上并不需要空格)</strong><br>
+区块内嵌列表</p>
+<blockquote>
+<p>ABC</p>
+<blockquote>
+<p>DEF</p>
+<ol>
+<li>第一行
+<ul>
+<li>第二行</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+</blockquote>
+<p>列表内嵌区块</p>
+<ul>
 <li>
-<p><a target="_blank" rel="noopener" href="http://www.jsnice.org/">mim.js反编译</a><sup><strong><code>隐藏“use strict”即可变成可使用的js源码</code></strong></sup></p>
+<p>A</p>
+<blockquote>
+<p>AB<br>AC</p>
+</blockquote>
 </li>
 <li>
-<p><a target="_blank" rel="noopener" href="https://github.com/NickeManarin/ScreenToGif">git录制</a></p>
+<p>B</p>
+<blockquote>
+<p>BC<br>
+BA</p>
+</blockquote>
 </li>
 </ul>
+<hr>
+<h2 id="代码">代码</h2>
+<p>函数名可以使用``<br><code>Test()</code>;</p>
+<p>代码区块可以用4个空格(整体)或者一个制表符(Tab键)</p>
+<pre><code>void Test()&#123;
+    console.write(&quot;47&quot;);
+&#125;
+</code></pre>
+<p>也可以使用````包裹代码,指定语言决定渲染效果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Test</span><span class="params">()</span></span>&#123;</span><br><span class="line">    console.write(<span class="string">&quot;47&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="链接">链接</h2>
+<p>使用[name]+(url)标记带有名称的链接<a target="_blank" rel="noopener" href="https://dream-47.github.io">Dream-47</a><br>
+使用&lt; url &gt;标记不带名称的链接<a target="_blank" rel="noopener" href="https://github.com/Dream-47">https://github.com/Dream-47</a><br>
+也可以使用变量url进行赋值,这是博客的域名<a target="_blank" rel="noopener" href="https://dream-47.github.io">Dream-47</a></p>
+<h2 id="图片">图片</h2>
+<p>！+ [图片描述] + (图片地址 “honor”)(图片不可用本地路径代替？)<br>
+<img src="https://dream-47.github.io/i/headimg.jpg" alt="头像" title="47"></p>
+<p>或者与网址一样使用变量(貌似不能用字符串拼接的形式对变量进行处)<br>
+<img src="https://dream-47.github.io/i/headimg.jpg" alt="头像" title="47"></p>
+<p>如果想要图片宽高进行处理，请使用html中的img标签(如果用百分比定义图片的大小的话,height无作用)<br>
+<img src="https://dream-47.github.io/i/headimg.jpg" width = 125 height = 70%></img></p>
+<hr>
+<h2 id="表格">表格</h2>
+<p>使用 | 分割不同的单元格，使用 - 分割(必须)表头与其他行</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">AA</th>
+<th>BB</th>
+<th style="text-align:center">CC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">E</td>
+<td>F</td>
+<td style="text-align:center">G</td>
+</tr>
+<tr>
+<td style="text-align:right">H</td>
+<td>I</td>
+<td style="text-align:center">J</td>
+</tr>
+</tbody>
+</table>
+<p>-: 右对齐 :- 左对齐 :-:居中对齐(表头元素在整个单元格中居中，其他行元素以表头元素对齐，默认向左对齐))</p>
+<hr>
+<h2 id="高级技巧">高级技巧</h2>
+<p><strong>Markdown可以使用一些html标签</strong></p>
+<blockquote>
+<ul>
+<li><code>kbd</code>键盘文本 <kbd>hellow</kbd></li>
+<li><code>b</code>粗体 <b>hellow</b></li>
+<li><code>i</code>斜体 <i>hellow</i></li>
+<li><code>sup</code>上标 <sup>hellow</sup></li>
+<li><code>sub</code>下标 <sub>hellow</sub></li>
+<li><code>em</code>强调<em>hellow</em>(效果目前等同于斜体，用与特定术语与概念)</li>
+<li><code>br</code>换行hellow<br>world(在html中,br没有结束符)</li>
+</ul>
+</blockquote>
+<p><strong>Markdown使用转义符号<code>\</code>对特殊符号进行转义，恢复原有含义</strong><br>
+<em>斜体</em><br>
+*斜体*</p>
 
       
     </div>
@@ -391,7 +529,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://yoursite.com/2020/08/11/%E5%B7%A5%E5%85%B7/" title="工具" target="_blank" rel="external">http://yoursite.com/2020/08/11/%E5%B7%A5%E5%85%B7/</a>
+      <a href="http://yoursite.com/2020/08/06/markdown/" title="markdown" target="_blank" rel="external">http://yoursite.com/2020/08/06/markdown/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -421,94 +559,37 @@
     </div>
   </article>
   
-    
-  <section id="comments">
-  	
-      <div id="vcomments"></div>
-    
-  </section>
-
-
-  
 </div>
 
-  <nav class="bar bar-footer clearfix" data-stick-bottom>
-  <div class="bar-inner">
   
-  <ul class="pager pull-left">
-    
-    <li class="prev">
-      <a href="/2020/08/15/todo/" title="todo"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
-    
-    <li class="next">
-      <a href="/2020/08/07/hello-world/" title="Hello World"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
-    </li>
-    
-    
-  </ul>
+
   
-  
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
-  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
-    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
-  </div> -->
-  
-  
-  <div class="bar-right">
     
-    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
-    
-  </div>
-  </div>
-</nav>
-  
-<!-- Modal -->
-<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content donate">
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <div class="modal-body">
-        <div class="donate-box">
-          <div class="donate-head">
-            <p>感谢您的支持，我会继续努力的!</p>
-          </div>
-          <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
-              <div class="donate-payimg">
-                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
-              </div>
-              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
-              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
-              <div class="donate-payimg">
-                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
-              </div>
-              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
-              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
-            </div>
-          </div>
-          <div class="donate-footer">
-            <ul class="nav nav-tabs nav-justified" role="tablist">
-              <li role="presentation" class="active">
-                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
-              </li>
-              <li role="presentation" class="">
-                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
-              </li>
-            </ul>
-          </div>
+    <nav class="bar bar-footer clearfix" data-stick-bottom>
+        <div class="bar-inner">
+        <ul class="pager pull-left">
+            
+            <li class="prev">
+                <a href="/page/2/">
+                    <i class="icon icon-angle-left"></i>
+                    上一页
+                </a>
+            </li>
+            
+            
+            <li class="next disabled">
+                <a href="javascript:;">
+                    下一页
+                    <i class="icon icon-angle-right"></i>                    
+                </a>
+            </li>
+            
+        </ul>
+        <div class="total-article bar-right">Page 3 of 3</div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
+    </nav>
+    
+ 
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -569,33 +650,6 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
    
 
 
-
-
-   
-    
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/valine"></script>
-  <script type="text/javascript">
-  var GUEST = ['nick', 'mail', 'link'];
-  var meta = 'nick,mail,link';
-  meta = meta.split(',').filter(function(item) {
-    return GUEST.indexOf(item) > -1;
-  });
-  new Valine({
-    el: '#vcomments',
-    verify: false,
-    notify: false,
-    appId: '',
-    appKey: '',
-    placeholder: 'Just go go',
-    avatar: 'mm',
-    meta: meta,
-    pageSize: '10' || 10,
-    visitor: false
-  });
-  </script>
-
-     
 
 
 
